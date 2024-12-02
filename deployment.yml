@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-node-app-deployment
+  labels:
+    app: kube-node-app
+spec:
+  replicas: 2  # Number of pods to run; adjust as needed
+  selector:
+    matchLabels:
+      app: kube-node-app
+  template:
+    metadata:
+      labels:
+        app: kube-node-app
+    spec:
+      containers:
+      - name: kube-node-app
+        image: nagasurya1812/kube-node-app # Your Docker image
+        ports:
+        - containerPort: 3000  # Port exposed by your application
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
